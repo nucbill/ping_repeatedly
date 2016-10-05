@@ -52,8 +52,8 @@ pingwork(){
 		if ! [ $error1 = 0 -o $error2 = 0 ];then
 			errorcount=$((errorcount+1))
 		fi
-		echo "error:$errorcount" > /home/labserver/bin/log/errors
-		echo "total:$count" >> /home/labserver/bin/log/errors
+		echo "error:$errorcount" > /tmp/ping_repeatedly_errors
+		echo "total:$count" >> /tmp/ping_repeatedly_errors
 	done
 }
 
