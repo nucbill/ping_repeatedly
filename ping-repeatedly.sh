@@ -51,6 +51,7 @@ pingwork(){
 		count=$((count+1))
 		if ! [ $error1 = 0 -o $error2 = 0 ];then
 			errorcount=$((errorcount+1))
+			#$exe -c 500 -w 501 $website2 > /dev/null 2>&1 & #ping more
 		fi
 		echo "error:$errorcount" > /tmp/ping_repeatedly_errors
 		echo "total:$count" >> /tmp/ping_repeatedly_errors
