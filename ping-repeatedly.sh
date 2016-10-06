@@ -1,5 +1,5 @@
 #!/bin/bash
-# version 1.0.2
+# version 1.0.1
 # copyright nucbill
 
 sleeptime=30
@@ -10,7 +10,6 @@ ping_wait_time=8
 ping_times=8
 pidfile="/tmp/pding-google-repeatedly.pid"
 exe="ping6"
-running_user=`whoami`
 
 USAGE="USAGE: ping-google-repeatedly [start|stop] [timeperiod] [-s2 website2] [-s website] [-c how_many_times_of_everyping] [-w wait_time_of_everyping] [-exe ping_or_ping6]"
 
@@ -53,16 +52,10 @@ pingwork(){
 		count=$((count+1))
 		if ! [ $error1 = 0 -o $error2 = 0 ];then
 			errorcount=$((errorcount+1))
-			if [ $status = "succeed"] && [ $running_user = "root" ];then
-				#do something you need, if the status changed
-			fi
+			status="failed"
 			$exe -c 500 -w 501 $website > /dev/null 2>&1 &	#ping more
 			$exe -c 500 -w 501 $website2 > /dev/null 2>&1 &	#ping more
-            status="failed"
 		else
-			if [ $status = "failed"] && [ $running_user = "root" ];then
-				#do something you need, if the status changed
-			fi
 			status="succeed"
 		fi
 		echo "error:	$errorcount"	>   /tmp/ping_repeatedly_errors
