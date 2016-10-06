@@ -53,14 +53,14 @@ pingwork(){
 		count=$((count+1))
 		if ! [ $error1 = 0 -o $error2 = 0 ];then
 			errorcount=$((errorcount+1))
-			if [ $status = "succeed"] && [ $running_user = "root" ];then
+			if [ $status = "succeed" ] && [ $running_user = "root" ];then
 				#do something you need, if the status changed
 			fi
 			$exe -c 500 -w 501 $website > /dev/null 2>&1 &	#ping more
 			$exe -c 500 -w 501 $website2 > /dev/null 2>&1 &	#ping more
             status="failed"
 		else
-			if [ $status = "failed"] && [ $running_user = "root" ];then
+			if [ $status = "failed" ] && [ $running_user = "root" ];then
 				#do something you need, if the status changed
 			fi
 			status="succeed"
