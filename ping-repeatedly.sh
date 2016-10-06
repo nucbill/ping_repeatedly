@@ -1,10 +1,11 @@
 #!/bin/bash
-# version 1.0
+# version 1.0.1
 # copyright nucbill
+
 sleeptime=30
 #action=start
 website="www.google.com"
-website2="www.microsoft.com"
+website2="bt.neu6.edu.cn"
 ping_wait_time=8
 ping_times=8
 pidfile="/tmp/pding-google-repeatedly.pid"
@@ -51,10 +52,15 @@ pingwork(){
 		count=$((count+1))
 		if ! [ $error1 = 0 -o $error2 = 0 ];then
 			errorcount=$((errorcount+1))
-			#$exe -c 500 -w 501 $website2 > /dev/null 2>&1 & #ping more
+			status="failed"
+			$exe -c 500 -w 501 $website > /dev/null 2>&1 &	#ping more
+			$exe -c 500 -w 501 $website2 > /dev/null 2>&1 &	#ping more
+		else
+			status="succeed"
 		fi
-		echo "error:$errorcount" > /tmp/ping_repeatedly_errors
-		echo "total:$count" >> /tmp/ping_repeatedly_errors
+		echo "error:	$errorcount"	>   /tmp/ping_repeatedly_errors
+		echo "total:	$count"			>>  /tmp/ping_repeatedly_errors
+		echo "LastPing:	$status"		>>  /tmp/ping_repeatedly_errors
 	done
 }
 
